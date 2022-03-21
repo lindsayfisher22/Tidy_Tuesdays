@@ -1,0 +1,40 @@
+---
+title: "Freedom"
+author: "Lindsay Fisher"
+date: "2/22/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.path = "../Output")
+```
+
+
+# Load Libraries 
+```{r, warning=FALSE, message=FALSE}
+library(here)
+library(tidyverse)
+library(PNWColors)
+```
+
+# Load Data 
+
+```{r ukraineplot, warning=FALSE, message=FALSE}
+FreeData<-read_csv(here("2022-02-22","Data","freedom.csv")) %>% 
+  filter(country == "Ukraine")
+
+ggplot(data = FreeData,
+       aes(x = year))+
+  geom_smooth(aes(y = CL, color = "Civil Liberties"))+
+  geom_smooth(aes(y = PR, color = "Political Rights"))+
+  labs(y = "Lack of freedom",
+       x = "Year",
+       color = "Legend",
+       title = "Freedom Status of Ukraine since 1995")+
+  scale_color_manual(values = pnw_palette("Moth"))+
+  theme_classic()
+
+ 
+
+
+```
